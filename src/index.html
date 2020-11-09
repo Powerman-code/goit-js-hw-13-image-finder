@@ -5,9 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Webpack Starter Kit</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
   </head>
 
   <body>
-
+    <div id="root">
+      <form class="search-form js-search-form" id="search-form">
+        <input class="search-input js-search-input" type="text" name="query" autocomplete="off id="searchQuery"
+          placeholder="Search photos..." />
+        <button type="submit" class="search-btn btn">Search</button>
+      </form>
+      <p class='no-result is-hidden'>Sorry, no results were found.</p>
+      <ul class="gallery js-articles-container">
+        <!-- Список <li> с карточками изображений -->
+      </ul>
+      <button type="button" class="btn is-hidden" data-action="load-more">Load more</button>
   </body>
 </html>
