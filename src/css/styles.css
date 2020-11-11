@@ -18,6 +18,10 @@ body {
   font-size: 24px;
 }
 
+li {
+  list-style: none;
+}
+
 .search-input {
   margin-right: 15px;
   margin-bottom: 15px;
