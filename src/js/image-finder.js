@@ -57,6 +57,11 @@ function onSearch(e) {
 
 function onLoadMore(e) {
     imageApiService.fetchImage().then(appendImagesMarkup);
+
+    window.scrollTo({
+    bottom: 100,
+    behavior: 'smooth'
+    });
 }
 
 function appendImagesMarkup(hits) {
