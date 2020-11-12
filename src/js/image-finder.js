@@ -1,5 +1,7 @@
 // Есть файл apiService.js с дефолтным экспортом объекта отвечающего за логику HTTP-запросов к API
 import cardTpl from '../templates/photo-card.hbs';
+import { onOpenModal } from './modal';
+
 // import API from '../js/api-service';
 import ImageApiService from '../js/api-service';
 const URL = 'https://pixabay.com/api/?image_type=photo&orientation=horizontal&q=что_искать&page=номер_страницы&per_page=12&key=твой_ключ';
@@ -20,6 +22,7 @@ console.log(imageApiService);
 refs.searchForm.addEventListener('submit', onSearch);
 // loadMoreBtn.refs.button.addEventListener('click', onLoadMore);
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
+refs.imagesContainer.addEventListener('click', onOpenModal);
 
 // function onSearch(e) {
 //     e.preventDefault();
