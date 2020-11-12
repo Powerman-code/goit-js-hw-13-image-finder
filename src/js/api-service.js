@@ -13,7 +13,13 @@ export default class ImageApiService {
             .then(data => {
                 this.incrementPage();
                 return data.hits;
+                // можно деструктуризировать data т.е.
+                // .then(({ hits }) => {
+                //     this.incrementPage();
+                //     return hits;
+                // })
             })
+
     }
     incrementPage() {
         this.page += 1;

@@ -2,7 +2,6 @@
 import cardTpl from '../templates/photo-card.hbs';
 // import API from '../js/api-service';
 import ImageApiService from '../js/api-service';
-// console.log(ImageApiService);
 const URL = 'https://pixabay.com/api/?image_type=photo&orientation=horizontal&q=что_искать&page=номер_страницы&per_page=12&key=твой_ключ';
 const BASE_URL = 'https://pixabay.com/api';
 // let searchQuery = '';
@@ -11,18 +10,15 @@ const refs = {
     searchForm: document.querySelector('.js-search-form'),
     imagesContainer: document.querySelector('.js-articles-container'),
     loadMoreBtn: document.querySelector('[data-action="load-more"]')
+    // можно сделать как через реф кнопку, так и через экземпляр
 };
 
 const imageApiService = new ImageApiService();
 
 console.log(imageApiService);
-// const options = {
-//         headers: {
-//             Authorization: '19008570-42b7cc415e1b0453677c4c4a2',
-//         },
-//     }
 
 refs.searchForm.addEventListener('submit', onSearch);
+// loadMoreBtn.refs.button.addEventListener('click', onLoadMore);
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
 
 // function onSearch(e) {
@@ -40,12 +36,14 @@ refs.loadMoreBtn.addEventListener('click', onLoadMore);
 
 function onSearch(e) {
     e.preventDefault();
-
-    clearImagesMarkup();
     imageApiService.query = e.target.elements.query.value;
+    clearImagesMarkup();
     imageApiService.resetPage();
     imageApiService.fetchImage().then(appendImagesMarkup);
-
+    console.log(refs.imagesContainer);
+    if (imageApiService.query !== '') {
+        refs.loadMoreBtn.classList.remove('is-hidden');
+    }
     // API(searchQuery)
     //     .then(response => {
     //         appendImagesMarkup(response.hits);
