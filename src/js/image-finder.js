@@ -123,17 +123,6 @@ function onFetchError(error) {
     //     //     })
 
 
-// var blablabla = {
-//     somekey: '1232rdfsdf',
-//     then: function (cb) {
-//         this.somekey = this.somekey + ' some response';
-//         return cb(this.somekey, 'for fun');
-//     }
-// }
-
-// blablabla.then((resp, secondArg) => {
-//     console.log(resp, secondArg);
-// });
 
 // function appendImagesMarkup(images) {
 //     refs.imagesContainer.insertAdjacentHTML('beforeend', cardTpl(images))
