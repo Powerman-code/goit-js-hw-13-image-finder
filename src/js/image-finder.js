@@ -1,9 +1,12 @@
 // Есть файл apiService.js с дефолтным экспортом объекта отвечающего за логику HTTP-запросов к API
 import cardTpl from '../templates/photo-card.hbs';
 import { onOpenModal } from './modal';
-
 // import API from '../js/api-service';
 import ImageApiService from '../js/api-service';
+// import '@pnotify/core/dist/PNotify.css';
+// import '@pnotify/core/dist/BrightTheme.css';
+// import pnotify from './js/pnotife-error';
+
 const URL = 'https://pixabay.com/api/?image_type=photo&orientation=horizontal&q=что_искать&page=номер_страницы&per_page=12&key=твой_ключ';
 const BASE_URL = 'https://pixabay.com/api';
 // let searchQuery = '';
@@ -39,10 +42,21 @@ refs.imagesContainer.addEventListener('click', onOpenModal);
 
 function onSearch(e) {
     e.preventDefault();
+
     imageApiService.query = e.target.elements.query.value;
     clearImagesMarkup();
     imageApiService.resetPage();
-    imageApiService.fetchImage().then(appendImagesMarkup);
+    // imageApiService.fetchImage().then(appendImagesMarkup).catch(onFetchError);
+    imageApiService.fetchImage().then(hits => {
+            if (hits.length !== 0) {
+                console.log(hits.length)
+                appendImagesMarkup(hits);
+            } else {
+                console.log(hits.length)
+                 console.log('error')
+                onFetchError();
+            }
+        }).catch(onFetchError);
     console.log(refs.imagesContainer);
     if (imageApiService.query !== '') {
         refs.loadMoreBtn.classList.remove('is-hidden');
@@ -56,7 +70,9 @@ function onSearch(e) {
 }
 
 function onLoadMore(e) {
-    imageApiService.fetchImage().then(appendImagesMarkup);
+    imageApiService.fetchImage()
+        .then(appendImagesMarkup)
+        .catch(onFetchError);
 
     window.scrollTo({
     bottom: 100,
@@ -74,6 +90,14 @@ function appendImagesMarkup(hits) {
 function clearImagesMarkup() {
     refs.imagesContainer.innerHTML = '';
 };
+
+function onFetchError(error) {
+    alert('Ошибка ввода. Проверьте правильность запроса');
+}
+
+
+
+
 
 // function fetchImage() {
 //     return fetch(`${BASE_URL}/?image_type=photo&orientation=horizontal&q=${searchQuery}&page=1&per_page=12&key=${API_KEY}`)
@@ -118,9 +142,7 @@ function clearImagesMarkup() {
 //     // refs.imagesContainer.innerHTML = markup;
 // }
 
-function onFetchError(error) {
-    alert('Ошибка');
-}
+
 
 // const ftch = fetch(`${BASE_URL}/?image_type=photo&orientation=horizontal&q=cat&page=1&per_page=12&key=${API_KEY}`);
 // console.log(ftch);

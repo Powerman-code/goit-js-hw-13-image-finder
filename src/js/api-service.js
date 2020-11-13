@@ -19,7 +19,7 @@ export default class ImageApiService {
                 //     return hits;
                 // })
             })
-
+            // .catch(console.log('error'));
     }
     incrementPage() {
         this.page += 1;
